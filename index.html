@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <!-- <button type="button" id="btn-natural">Natural</button>
+    <button type="button" id="btn-mutation">Mutation</button> -->
+
+    <button type="button" data-btn="all">All</button>
+    <button type="button" data-btn="Natural">Natural</button>
+    <button type="button" data-btn="Mutation">Mutation</button>
+    <!-- <select></select> -->
+    <div id="select"></div>
+    <div id="list">
+    </div>
+
+
+    <script type='module'>
+        import getDataFromAPI from './request.js'
+        import getListTemplate from './list.js' 
+        import filter from './filter.js' 
+        import createSelect from './select.js'
+        createSelect();
+        const data = await getDataFromAPI()
+        console.log(data)
+        // console.log(await getListTemplate())
+        list.innerHTML = await getListTemplate(data)
+        
+        const btns = document.querySelectorAll("[data-btn]")
+        console.log(filter)
+        filter({
+            btns: btns, 
+            data: data, 
+            parent: list
+        })
+
+        // const appNode = document.querySelector('#app')
+        // console.log(appNode)
+        // console.log(app)
+    </script>
+</body>
+</html>
