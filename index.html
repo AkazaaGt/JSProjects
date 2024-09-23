@@ -5,38 +5,56 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     
     <!-- <button type="button" id="btn-natural">Natural</button>
     <button type="button" id="btn-mutation">Mutation</button> -->
-
-    <button type="button" data-btn="all">All</button>
-    <button type="button" data-btn="Natural">Natural</button>
-    <button type="button" data-btn="Mutation">Mutation</button>
-    <!-- <select></select> -->
-    <div id="select"></div>
-    <div id="list">
+    <div class="filter-wrapper">
+        <div class="filter-btn">
+            <h2>Фильтрация по пародам</h2>
+              <button type="button" data-btn="all">All</button>
+            <button type="button" data-btn="Natural">Natural</button>
+            <button type="button" data-btn="Mutation">Mutation</button>
+             <div id="list"></div>
+        </div>
+        
+        <div class="filter-select">
+            <h2>Фильтрация по странам</h2>
+             <div id="select"></div>
+             <div id="select-list"></div>
+        </div>
     </div>
+
+  
+
 
 
     <script type='module'>
+        // Import
         import getDataFromAPI from './request.js'
         import getListTemplate from './list.js' 
         import filter from './filter.js' 
         import createSelect from './select.js'
-        createSelect();
+        // functions and var
+        await createSelect();
+        const selectList = document.querySelector('#select-list')
+        const select = document.querySelector('#select')
         const data = await getDataFromAPI()
         console.log(data)
+        console.log(select)
         // console.log(await getListTemplate())
         list.innerHTML = await getListTemplate(data)
+         selectList.innerHTML = await getListTemplate(data)
         
         const btns = document.querySelectorAll("[data-btn]")
-        console.log(filter)
         filter({
             btns: btns, 
             data: data, 
-            parent: list
+            parent: list,
+            select: select,
+            selectList:selectList
         })
 
         // const appNode = document.querySelector('#app')

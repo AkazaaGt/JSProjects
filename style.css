@@ -1,0 +1,9 @@
+.filter-wrapper {
+  display: flex;
+  gap: 50px;
+  flex-wrap: nowrap;
+}
+
+.filter-btn, .filter-select {
+  width: 50%;
+}
