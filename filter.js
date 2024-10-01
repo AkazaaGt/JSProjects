@@ -2,11 +2,6 @@ import getListTemplate from './list.js'
 
 // TODO: improve btn filter and 
 // TODO: implement selector on breed
-const FILTER_TYPES = {
-    natural: 'Natural',
-    mutation: 'Mutation'
-}
-
 
 export default async function filter({btns, data, parent, select}) {
     if(!btns) return
@@ -14,25 +9,6 @@ export default async function filter({btns, data, parent, select}) {
 
     let currentFilter = new Map();
 
-    const handleBtnFilter = (event) => {
-        event.preventDefault()
-        const btn = event.target
-        const filterType = btn.dataset.btn
-        if(filterType === FILTER_TYPES.natural) {
-            filteredData = naturalDataFilter()
-        } else if(filterType === FILTER_TYPES.mutation) {
-            filteredData = mutationDataFilter()
-        }
-        return filteredData
-    } 
-    const handleSelectFilter = (event) =>{
-        const filterType = event.target.value
-        filteredData = data.filter(item=>{
-            return item.country === filterType;
-        })
-        console.log(filterType)
-        return filteredData;
-    }
     const handleFilter = (e) => {
         let filteredData = data
         if (e.target.dataset.btn) {
@@ -60,10 +36,6 @@ export default async function filter({btns, data, parent, select}) {
 						(item) => item.country === currentFilter.get('selectors')
 					)
 				}
-
-
- 
-    // const selectDataFilter = ()
 
     btns.forEach(btn => document.addEventListener('click', async(e) => {
         const filteredData = handleFilter(e)
