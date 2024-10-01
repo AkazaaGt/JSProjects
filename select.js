@@ -1,9 +1,6 @@
 import getDataFromAPI from './request.js'
 
-export default async function createSelect(){
-  const data = await getDataFromAPI();
-  const parent = document.querySelector('#select')
-  const fragment = document.createDocumentFragment();
+export default async function createSelect(data, parent){
   const select = document.createElement('select');
   console.log(data)
    const setCollection = new Set()
@@ -21,6 +18,5 @@ export default async function createSelect(){
    
   console.log(setCollection)
   console.log(select);
-  fragment.appendChild(select);
-  parent.appendChild(fragment)
+  parent.appendChild(select)
 }

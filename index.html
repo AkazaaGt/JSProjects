@@ -23,7 +23,6 @@
         <div class="filter-select">
             <h2>Фильтрация по странам</h2>
              <div id="select"></div>
-             <div id="select-list"></div>
         </div>
     </div>
 
@@ -37,24 +36,26 @@
         import getListTemplate from './list.js' 
         import filter from './filter.js' 
         import createSelect from './select.js'
-        // functions and var
-        await createSelect();
-        const selectList = document.querySelector('#select-list')
+
+        
+       
         const select = document.querySelector('#select')
+        const btns = document.querySelectorAll("[data-btn]")
         const data = await getDataFromAPI()
+        const listTemplate = await getListTemplate(data)
+
+        await createSelect(data, select);
+
         console.log(data)
         console.log(select)
         // console.log(await getListTemplate())
-        list.innerHTML = await getListTemplate(data)
-         selectList.innerHTML = await getListTemplate(data)
+        list.innerHTML = listTemplate
         
-        const btns = document.querySelectorAll("[data-btn]")
         filter({
             btns: btns, 
             data: data, 
             parent: list,
             select: select,
-            selectList:selectList
         })
 
         // const appNode = document.querySelector('#app')
